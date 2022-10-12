@@ -1,0 +1,25 @@
+.postWrapper{
+    padding: 20px;
+}
+
+.textPost{
+    width: 600px;
+    display: grid;
+    grid-template-areas:
+            "txt btnadd"
+            "txt btndlt";
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 9fr 1fr;
+}
+
+.btnAdd{
+    grid-area: btnadd;
+}
+
+.btnDlt{
+    grid-area: btndlt;
+}
+
+.txt{
+    grid-area: txt;
+}

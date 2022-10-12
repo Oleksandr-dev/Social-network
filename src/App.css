@@ -3,43 +3,14 @@
     grid-template-areas:
     "h h"
     "n c";
+
     grid-auto-rows: 60px 1fr;
     grid-auto-columns: 2fr 10fr;
     /*grid-gap: 10px;*/
 }
-.header{
-    grid-area: h;
-    background-color: blueviolet;
-}
 
-.header img{
-    width: 50px;
-    margin: 5px;
-
-}
-
-.navbar{
-    grid-area: n;
-    background-color: green;
-
-}
-
-.menu{
-    margin: 5px
-}
-
-.content{
+.App-wrapper-content{
     grid-area: c;
     background-color: blue;
-
-}
-
-.content img{
-    width: 600px;
-    margin: 5px;
-}
-
-.content-description{
-    margin: 5px;
 
 }
