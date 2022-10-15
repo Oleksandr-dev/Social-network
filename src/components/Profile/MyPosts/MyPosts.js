@@ -6,9 +6,10 @@ let postData =[
     {id:2, message:"It's my first post", likeCount:51},
 ]
 
-let postElements = postData.map( p => (<Post message={p.message} likeCount={p.likeCount}/>))
+/*let postElements = postData.map( p => (<Post message={p.message} likeCount={p.likeCount}/>))*/
 
-const MyPosts = () => {
+const MyPosts = (props) => {
+    let postElements = props.postData.map( p => (<Post message={p.message} likeCount={p.likeCount}/>))
     return (
         <div className={style.postWrapper}>
             <div>
