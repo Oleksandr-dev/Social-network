@@ -1,11 +1,13 @@
 .App-wrapper{
+    height: 100vh;
     display: grid;
+
     grid-template-areas:
     "h h"
     "n c";
 
     grid-auto-rows: 60px 1fr;
-    grid-auto-columns: 2fr 10fr;
+    grid-auto-columns: 3fr 10fr;
     /*grid-gap: 10px;*/
 }
 

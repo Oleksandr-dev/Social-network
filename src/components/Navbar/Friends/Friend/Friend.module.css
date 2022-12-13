@@ -1,0 +1,12 @@
+.friend{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    /*padding: 5px;*/
+}
+
+
+
+.name{
+    font-size: medium;
+    color: white;
+}

@@ -1,0 +1,51 @@
+/*.message{
+    display: flex;
+    flex-direction: column;
+
+}*/
+
+.notMyMessage {
+    color: azure;
+    background-color: gray;
+    padding: 5px;
+    border-radius: 10px;
+    margin: 5px 10px;
+    max-width: 80%;
+    width: fit-content;
+
+}
+
+.myMessage{
+    color: azure;
+    background-color: blue;
+    padding: 5px;
+    border-radius: 10px;
+    margin: 5px 10px;
+    max-width: 80%;
+    width: fit-content;
+
+    align-self: end;
+
+
+
+
+}
+/*
+
+.messageArea{
+    width: 600px;
+    display: grid;
+    grid-template-areas:
+            "txt btnadd";
+
+    !*grid-template-rows: 1fr 1fr;*!
+    grid-template-columns: 9fr 1fr;
+}
+
+.btnAdd{
+    grid-area: btnadd;
+}
+
+.area{
+    grid-area: txt;
+}*/

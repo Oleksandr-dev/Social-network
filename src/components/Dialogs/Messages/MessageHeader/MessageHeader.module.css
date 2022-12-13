@@ -1,0 +1,6 @@
+.messageArea {
+    padding: 10px;
+    background-color: violet;
+    display: flex;
+    flex-direction: column;
+}

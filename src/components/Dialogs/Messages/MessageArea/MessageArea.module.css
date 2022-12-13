@@ -1,0 +1,8 @@
+.messageArea {
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    height: calc(100vh - 162px);
+}

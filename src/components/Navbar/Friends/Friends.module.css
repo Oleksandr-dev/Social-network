@@ -1,0 +1,28 @@
+
+.friendsBox{
+    margin-top: 50px;
+}
+
+.name{
+    font-size: medium;
+    color: white;
+}
+
+.friend{
+    display: grid;
+    grid-template-columns: 3fr 3fr 3fr 3fr;
+    grid-template-rows: 3fr 3fr;
+
+}
+
+.friend img{
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+
+
+.head{
+    color: white;
+}
+

@@ -1,9 +1,9 @@
-.postWrapper{
-    padding: 20px;
-}
+.textArea{
+    position: absolute;
+    bottom: 0;
+    margin: 10px;
 
-.textPost{
-    width: 600px;
+    width: auto;
     display: grid;
     grid-template-areas:
             "txt btnadd";
@@ -16,10 +16,6 @@
     grid-area: btnadd;
 }
 
-.btnDlt{
-    grid-area: btndlt;
-}
-
-.txt{
+.area{
     grid-area: txt;
 }
