@@ -1,33 +1,34 @@
 import style from "./MessageTextArea.module.css"
 import React from "react";
+import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../../redux/state";
 
 const MessageTextArea = (props) => {
-    /*debugger*/
 
     let newMessageElement = React.createRef()
 
     let sendMessage = () => {
         let text = newMessageElement.current.value
-        props.addMessage(text)
+        if (text === '') return
+        props.dispatch(addMessageActionCreator())
+    }
+
+    let updateNewMessage = () =>{
+        let text = newMessageElement.current.value
+        props.dispatch(updateNewMessageTextActionCreator(text))
     }
 
     return (
         <div className={style.textArea}>
-            <textarea className={style.area} ref={newMessageElement}></textarea>
-            <button className={style.btnAdd} onClick={sendMessage}>Send message</button>
+            <textarea
+                className={style.area}
+                ref={newMessageElement}
+                onChange={updateNewMessage}
+                value={props.newMessageText}
+            ></textarea>
+            <button
+                className={style.btnAdd}
+                onClick={sendMessage}>Send message</button>
         </div>
-        /*<div className={style.dialogs}>
-
-            <div className={style.messageArea}>
-                <div className={style.messageArea}>
-                    {messageElements}
-                </div>
-                <div className={style.textArea}>
-                    <textarea className={style.area}></textarea>
-                    <button className={style.btnAdd}>Send message</button>
-                </div>
-            </div>
-        </div>*/
     )
 }
 

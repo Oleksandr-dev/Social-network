@@ -4,26 +4,16 @@ import MessageArea from "./MessageArea/MessageArea";
 import MessageTextArea from "./MessageTextArea/MessageTextArea";
 
 const Messages = (props) => {
-    /*debugger*/
 
     return (
         <div className={style.messageArea}>
             <MessageHeader />
             <MessageArea messageData={props.messageData}/>
-            <MessageTextArea addMessage={props.addMessage}/>
+            <MessageTextArea
+                newMessageText={props.newMessageText}
+                dispatch={props.dispatch}
+            />
         </div>
-        /*<div className={style.dialogs}>
-
-            <div className={style.messageArea}>
-                <div className={style.messageArea}>
-                    {messageElements}
-                </div>
-                <div className={style.textArea}>
-                    <textarea className={style.area}></textarea>
-                    <button className={style.btnAdd}>Send message</button>
-                </div>
-            </div>
-        </div>*/
     )
 }
 
