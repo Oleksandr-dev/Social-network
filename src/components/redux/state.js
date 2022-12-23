@@ -1,7 +1,5 @@
-const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
-const ADD_MESSAGE = 'ADD-MESSAGE'
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
+import profileReducer from "./profileReducer";
+import dialogsReducer from "./dialogsReducer";
 
 
 let store = {
@@ -43,67 +41,27 @@ let store = {
                 {id: 2, message: "It's my first post", likeCount: 51},
             ],
             newPostText: 'My new post',
-        }
+        },
     },
 
     getState(){
         return this._state
     },
-    rootRender(){
+    _callSubscruber(){
         console.log("rootrender in base store")
     },
     subscribe(callback){
-        this.rootRender = callback
+        this._callSubscruber = callback
     },
 
     dispatch(action){
-        if (action.type === ADD_POST) {
-            let newPost = {
-                id: 5,
-                message: this._state.profilePage.newPostText,
-                likeCount: 0,
-            }
-            this._state.profilePage.postData.push(newPost);
-            this._state.profilePage.newPostText = ''
-            this.rootRender(store)
-            return
-        }
-        if (action.type === UPDATE_NEW_POST_TEXT) {
-            this._state.profilePage.newPostText = action.newText;
-            this.rootRender(store)
-            return
-        }
-        if (action.type === ADD_MESSAGE) {
-            let newMessage = {
-                id: 6,
-                message: this._state.dialogsPage.newMessageText,
-                senderId: 0,
-            }
-            this._state.dialogsPage.messageData.push(newMessage);
-            this._state.dialogsPage.newMessageText = ''
-            this.rootRender(store)
-            return;
-        }
-        if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-            this._state.dialogsPage.newMessageText = action.newText;
-            this.rootRender(store)
-            return
-        }
-        alert('Unknown type')
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._callSubscruber(store)
+
     },
 
 
 }
-
-export const addPostActionCreator = () => ({type: ADD_POST})
-export const updateNewPostTextActionCreator = (text) => ({
-    type: UPDATE_NEW_POST_TEXT,
-    newText: text,
-})
-export const addMessageActionCreator = () => ({type: ADD_MESSAGE})
-export const updateNewMessageTextActionCreator = (text) => ({
-    type: UPDATE_NEW_MESSAGE_TEXT,
-    newText: text,
-})
 
 export default store

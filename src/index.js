@@ -4,16 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
-import store from "./components/redux/state";
+import store from "./components/redux/reduxStore";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-let rootRender = (store) =>{
+let rootRender = (store) => {
 
     root.render(
         <React.StrictMode>
             <BrowserRouter>
                 <App
+                    store={store}
                     state={store.getState()}
                     dispatch={store.dispatch.bind(store)}
                 />
@@ -28,4 +29,8 @@ let rootRender = (store) =>{
 }
 
 rootRender(store)
-store.subscribe(rootRender)
+store.subscribe(() => {
+        rootRender(store)
+    }
+)
+

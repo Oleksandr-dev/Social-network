@@ -11,7 +11,8 @@ const Messages = (props) => {
             <MessageArea messageData={props.messageData}/>
             <MessageTextArea
                 newMessageText={props.newMessageText}
-                dispatch={props.dispatch}
+                sendMessage={props.sendMessage}
+                updateNewMessage={props.updateNewMessage}
             />
         </div>
     )

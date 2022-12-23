@@ -9,6 +9,7 @@ import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 
 const App = (props) => {
+
     return (
         <div className="App-wrapper">
             <Header/>
@@ -17,12 +18,12 @@ const App = (props) => {
                 <Routes>
                     <Route path="/" element={
                         <Profile
-                            profilePageState={props.state.profilePage}
-                            dispatch={props.dispatch}
+                            store={props.store}
                         />}
                     />
                     <Route path="/dialogs/*" element={
                         <Dialogs
+                            store={props.store}
                             dialogsPageState={props.state.dialogsPage}
                             dispatch={props.dispatch}
                         />}
