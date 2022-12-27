@@ -1,4 +1,3 @@
-
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 
@@ -12,22 +11,34 @@ let initialState = {
 
 const profileReducer = (profilePage = initialState, action) => {
     /*debugger*/
-    if (action.type === ADD_POST) {
-        let newPost = {
-            id: 5,
-            message: profilePage.newPostText,
-            likeCount: 0,
+    switch (action.type) {
+        case ADD_POST: {
+            let newPost = {
+                id: 5,
+                message: profilePage.newPostText,
+                likeCount: 0,
+            }
+
+            let profilePageCopy = {...profilePage}
+            profilePageCopy.postData = [...profilePage.postData]
+
+            profilePageCopy.postData.push(newPost)
+            profilePageCopy.newPostText = ''
+            return profilePageCopy
         }
-        profilePage.postData.push(newPost);
-        profilePage.newPostText = ''
+        case UPDATE_NEW_POST_TEXT: {
+
+            let profilePageCopy = {...profilePage}
+
+            profilePageCopy.newPostText = action.newText;
+            return profilePageCopy
+        }
+        default :
+            return profilePage
 
     }
-    if (action.type === UPDATE_NEW_POST_TEXT) {
-        profilePage.newPostText = action.newText;
-
-    }
-    return profilePage
 }
+
 
 export default profileReducer
 

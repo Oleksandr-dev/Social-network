@@ -35,20 +35,30 @@ let initiallState = {
 
 const dialogsReducer = (dialogsPage = initiallState, action) => {
 
-    if (action.type === ADD_MESSAGE) {
-        let newMessage = {
-            id: 6,
-            message: dialogsPage.newMessageText,
-            senderId: 0,
-        }
-        dialogsPage.messageData.push(newMessage);
-        dialogsPage.newMessageText = ''
+    switch (action.type) {
+        case ADD_MESSAGE:{
+            let newMessage = {
+                id: 6,
+                message: dialogsPage.newMessageText,
+                senderId: 0,
+            }
 
+            let dialogsPageCopy = {...dialogsPage}
+            dialogsPageCopy.messageData = [...dialogsPage.messageData]
+
+            dialogsPageCopy.messageData.push(newMessage)
+            dialogsPageCopy.newMessageText = ''
+            return dialogsPageCopy
+        }
+        case UPDATE_NEW_MESSAGE_TEXT:{
+            let dialogsPageCopy = {...dialogsPage}
+
+            dialogsPageCopy.newMessageText = action.newText;
+            return dialogsPageCopy
+        }
+        default:
+            return dialogsPage
     }
-    if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-        dialogsPage.newMessageText = action.newText;
-    }
-    return dialogsPage
 }
 
 export default dialogsReducer

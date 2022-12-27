@@ -1,20 +1,19 @@
-import style from "./Contacts.module.css";
-import Contact from "./Contact/Contact";
 import Contacts from "./Contacts";
-import StoreContext from "../../../StoreContext";
+import {connect} from "react-redux";
 
 
-let ContactsContainer = () => {
-
-    return (
-        <StoreContext.Consumer>
-            {store => {
-                let dialogsElements = store.getState().dialogsPage.dialogsData
-
-                return <Contacts dialogsElements={dialogsElements}/>
-            }}
-        </StoreContext.Consumer>
-    )
+const mapStateToProps = (state)=>{
+    return {
+        dialogsElements: state.dialogsPage.dialogsData,
+    }
 }
+
+const mapDispatchToProps = (dispatch) =>{
+    return {}
+}
+
+
+const ContactsContainer = connect(mapStateToProps, mapDispatchToProps)(Contacts)
+
 
 export default ContactsContainer
