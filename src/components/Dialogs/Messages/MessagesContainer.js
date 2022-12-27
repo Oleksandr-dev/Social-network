@@ -1,23 +1,33 @@
 import Messages from "./Messages";
 import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/dialogsReducer";
+import StoreContext from "../../../StoreContext";
+import Contacts from "../Contacts/Contacts";
 
-const MessagesContainer = (props) => {
+const MessagesContainer = () => {
 
-    let sendMessage = () => {
-        props.store.dispatch(addMessageActionCreator())
-    }
+    return (
+        <StoreContext.Consumer>
+            {store => {
+                let sendMessage = () => {
+                    store.dispatch(addMessageActionCreator())
+                }
 
-    let updateNewMessage = (text) =>{
-        props.store.dispatch(updateNewMessageTextActionCreator(text))
-    }
+                let updateNewMessage = (text) =>{
+                    store.dispatch(updateNewMessageTextActionCreator(text))
+                }
 
-    return <Messages
-        messageData={props.store.getState().dialogsPage.messageData}
-        newMessageText={props.store.getState().dialogsPage.newMessageText}
-        sendMessage={sendMessage}
-        updateNewMessage={updateNewMessage}
+                return <Messages
+                    messageData={store.getState().dialogsPage.messageData}
+                    newMessageText={store.getState().dialogsPage.newMessageText}
+                    sendMessage={sendMessage}
+                    updateNewMessage={updateNewMessage}
 
-    />/*(
+                />
+            }}
+        </StoreContext.Consumer>
+    )
+
+    /*(
         <div className={style.messageArea}>
             <MessageHeader />
             <MessageArea messageData={props.messageData}/>

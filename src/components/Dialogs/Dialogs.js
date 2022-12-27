@@ -6,12 +6,8 @@ const Dialogs = (props) => {
 
     return (
         <div className={style.dialogs}>
-            <ContactsContainer
-                store={props.store}
-            />
-            <MessagesContainer
-                store={props.store}
-            />
+            <ContactsContainer />
+            <MessagesContainer />
         </div>
     )
 }
