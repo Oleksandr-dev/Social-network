@@ -1,8 +1,8 @@
-/*.message{
+.message{
     display: flex;
     flex-direction: column;
 
-}*/
+}
 
 .notMyMessage {
     color: azure;
@@ -27,7 +27,7 @@
     align-self: end;
 
 
-
+    /*display: flex;*/
 
 }
 /*

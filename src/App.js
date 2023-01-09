@@ -7,9 +7,10 @@ import {Route, Routes} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
+import FindUsers from "./components/FindUsers/FindUsers";
 
 const App = () => {
-
+    /*console.log("app")*/
     return (
         <div className="App-wrapper">
             <Header/>
@@ -21,6 +22,9 @@ const App = () => {
                     />
                     <Route path="/dialogs/*" element={
                         <Dialogs />}
+                    />
+                    <Route path="/find_users/*" element={
+                        <FindUsers />}
                     />
                     <Route path="/news/*" element={
                         <News/>}

@@ -1,7 +1,7 @@
 import style from "./MessageHeader.module.css"
 
 
-const MessageHeader = (props) => {
+const MessageHeader = () => {
 
 
     return (

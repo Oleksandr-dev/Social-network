@@ -4,7 +4,7 @@ import React from "react";
 
 
 const MyPosts = (props) => {
-
+    /*console.log("my posts")*/
     let postElements = props.postElements.map( p => (<Post message={p.message} likeCount={p.likeCount}/>))
 
 
