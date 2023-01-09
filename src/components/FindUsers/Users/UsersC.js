@@ -6,7 +6,7 @@ import React from "react";
 
 
 class UsersC extends React.Component{
-    constructor(props) {
+    /*constructor(props) {
         super(props);
         if(this.props.users.length === 0){
             axios.get("https://social-network.samuraijs.com/api/1.0/users").then(responce => {
@@ -14,7 +14,16 @@ class UsersC extends React.Component{
                 }
             )
         }
-        /*console.log("constructor")*/
+        /!*console.log("constructor")*!/
+    }*/
+
+    componentDidMount() {
+        if(this.props.users.length === 0){
+            axios.get("https://social-network.samuraijs.com/api/1.0/users").then(responce => {
+                    this.props.setUsers(responce.data.items)
+                }
+            )
+        }
     }
 
     usersElements = () => {return(
