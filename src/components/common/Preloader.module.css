@@ -1,0 +1,16 @@
+.preloaderWrapper{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+
+.imgPreloader{
+    height: 100px;
+    width: 100px;
+    animation: spin 2s linear 0s infinite;
+}
