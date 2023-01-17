@@ -23,7 +23,7 @@ const User = (props) => {
     return (
         <div className={style.user}>
             <div className={style.imgBtn}>
-                <NavLink to={'/'}>
+                <NavLink to={`/${props.userInfo.id}`}>
                     <img src={photo}/>
                 </NavLink>
                 {props.userInfo.followed === true ?
