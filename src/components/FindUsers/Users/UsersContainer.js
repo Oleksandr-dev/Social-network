@@ -20,7 +20,10 @@ class UsersAPIContainer extends React.Component {
     componentDidMount() {
         if (this.props.users.length === 0) {
             this.props.toggleIsFetching(true)
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(responce => {
+            axios.get(
+                `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+                {withCredentials: true }
+                ).then(responce => {
                     this.props.setUsers(responce.data.items)
                     this.props.setTotalUsersCount(responce.data.totalCount)
                     this.props.toggleIsFetching(false)
@@ -46,7 +49,10 @@ class UsersAPIContainer extends React.Component {
         if (currentNumber >= 1 && currentNumber <= Math.ceil(this.props.totalUsersCount / this.props.pageSize)) {
             this.props.toggleIsFetching(true)
             this.props.setCurrentPage(currentNumber)
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentNumber}&count=${this.props.pageSize}`).then(responce => {
+            axios.get(
+                `https://social-network.samuraijs.com/api/1.0/users?page=${currentNumber}&count=${this.props.pageSize}`,
+                {withCredentials: true}
+                ).then(responce => {
                     this.props.setUsers(responce.data.items)
                     this.props.toggleIsFetching(false)
                 }
@@ -164,7 +170,10 @@ class UsersAPIContainer extends React.Component {
         if (this.props.currentPage < Math.ceil(this.props.totalUsersCount / this.props.pageSize)) {
             this.props.toggleIsFetching(true)
             this.props.setCurrentPage(this.props.currentPage + 1)
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage + 1}&count=${this.props.pageSize}`).then(responce => {
+            axios.get(
+                `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage + 1}&count=${this.props.pageSize}`,
+                {withCredentials:true}
+                ).then(responce => {
                     this.props.setUsersShowMore(responce.data.items)
                     this.props.toggleIsFetching(false)
                 }

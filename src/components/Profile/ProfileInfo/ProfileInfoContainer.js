@@ -16,23 +16,14 @@ class ProfileInfoAPIContainer extends React.Component {
 
     componentDidMount() {
         let userId = this.props.router.params.userId ? this.props.router.params.userId : 2
-        console.log(userId)
-        console.log(this.props)
-        //if (this.props.profile === null || this.props.profile.userId != userId) {
-            //this.props.toggleIsFetching(true)
             axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`).then(responce => {
                 this.props.setProfile(responce.data)
-                /*this.props.setUsers(responce.data.items)
-                    this.props.setTotalUsersCount(responce.data.totalCount)*/
-                    //this.props.toggleIsFetching(false)
                 }
             )
        // }
     }
 
-    /*console.log("profile")*/
     render() {
-        console.log(this.props)
         if(this.props.profile == null ){
             return <Preloader />
         }

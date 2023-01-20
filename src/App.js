@@ -8,12 +8,13 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import FindUsers from "./components/FindUsers/FindUsers";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 const App = () => {
     /*console.log("app")*/
     return (
         <div className="App-wrapper">
-            <Header/>
+            <HeaderContainer />
             <Navbar/>
             <div className="App-wrapper-content">
                 <Routes>
