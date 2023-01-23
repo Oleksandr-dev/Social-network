@@ -1,6 +1,6 @@
 import style from "./User.module.css";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
+import {API} from "../../../DAL/api";
 /*id={u.id}
 userName={u.userName}
 img={u.img}
@@ -25,16 +25,11 @@ const User = (props) => {
         <div className={style.user}>
             <div className={style.imgBtn}>
                 <NavLink to={`/${props.userInfo.id}`}>
-                    <img src={photo}/>
+                    <img src={photo} alt={''}/>
                 </NavLink>
                 {props.userInfo.followed === true ?
                     <button onClick={()=>{
-                        axios.delete(
-                            `https://social-network.samuraijs.com/api/1.0/follow/${props.userInfo.id}`,
-                            {
-                            withCredentials: true,
-                            headers: {"API-KEY" : "2e81ace0-f035-420f-a428-ab9db5190736"}
-                        }).then(responce => {
+                        API.users.unfollowUser(props.userInfo.id).then(responce => {
                                 console.log(responce)
                                 if(responce.data.resultCode === 0){
                                     onUnfollow()
@@ -43,15 +38,11 @@ const User = (props) => {
                         )
                     }}>Unfollow</button> :
                     <button onClick={()=>{
-                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${props.userInfo.id}`, {},{
-                            withCredentials: true,
-                            headers: {"API-KEY" : "2e81ace0-f035-420f-a428-ab9db5190736"}
-                        }).then(responce => {
+                        API.users.followUser(props.userInfo.id).then(responce => {
                             console.log(responce)
                             if(responce.data.resultCode === 0){
                                 onFollow()
                             }
-
                             }
                         )
                     }}>Follow</button>}
@@ -70,8 +61,8 @@ const User = (props) => {
                 </div>
                 <div className={style.userLocation}>
                     <div className={style.location}>
-                        {'`${props.userInfo.location.country},`'}<br/><br/><br/><br/>
-                        {'`${props.userInfo.location.city}`'}
+                        {'props.userInfo.location.country'}<br/><br/><br/><br/>
+                        {'props.userInfo.location.city'}
                     </div>
 
                 </div>

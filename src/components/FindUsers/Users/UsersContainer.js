@@ -10,9 +10,9 @@ import {
     toggleIsFetching
 } from "../../redux/findUsersReducer";
 import React from "react";
-import axios from "axios";
 import User from "./User/User";
 import styles from "./Users.module.css";
+import {API} from "../../DAL/api";
 
 
 class UsersAPIContainer extends React.Component {
@@ -20,12 +20,9 @@ class UsersAPIContainer extends React.Component {
     componentDidMount() {
         if (this.props.users.length === 0) {
             this.props.toggleIsFetching(true)
-            axios.get(
-                `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
-                {withCredentials: true }
-                ).then(responce => {
-                    this.props.setUsers(responce.data.items)
-                    this.props.setTotalUsersCount(responce.data.totalCount)
+            API.users.getUsers(this.props.currentPage, this.props.pageSize).then(responce => {
+                    this.props.setUsers(responce.items)
+                    this.props.setTotalUsersCount(responce.totalCount)
                     this.props.toggleIsFetching(false)
                 }
             )
@@ -49,11 +46,8 @@ class UsersAPIContainer extends React.Component {
         if (currentNumber >= 1 && currentNumber <= Math.ceil(this.props.totalUsersCount / this.props.pageSize)) {
             this.props.toggleIsFetching(true)
             this.props.setCurrentPage(currentNumber)
-            axios.get(
-                `https://social-network.samuraijs.com/api/1.0/users?page=${currentNumber}&count=${this.props.pageSize}`,
-                {withCredentials: true}
-                ).then(responce => {
-                    this.props.setUsers(responce.data.items)
+            API.users.getUsers(currentNumber, this.props.pageSize).then(responce => {
+                    this.props.setUsers(responce.items)
                     this.props.toggleIsFetching(false)
                 }
             )
@@ -170,11 +164,8 @@ class UsersAPIContainer extends React.Component {
         if (this.props.currentPage < Math.ceil(this.props.totalUsersCount / this.props.pageSize)) {
             this.props.toggleIsFetching(true)
             this.props.setCurrentPage(this.props.currentPage + 1)
-            axios.get(
-                `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage + 1}&count=${this.props.pageSize}`,
-                {withCredentials:true}
-                ).then(responce => {
-                    this.props.setUsersShowMore(responce.data.items)
+            API.users.getUsers(this.props.currentPage + 1, this.props.pageSize).then(responce => {
+                    this.props.setUsersShowMore(responce.items)
                     this.props.toggleIsFetching(false)
                 }
             )
