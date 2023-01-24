@@ -10,7 +10,9 @@ const Friend = (props) => {
 
         <div className={styles.friend}>
             <div>
-                <img src={photo}/>
+                <img src={photo}
+                    alt={""}
+                />
             </div>
 
             <div className={styles.name}>

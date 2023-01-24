@@ -7,7 +7,9 @@ const Contact = (props) => {
     let photo = props.img ? props.img : noPhoto
     return (
         <div className={style.contact + ' ' + style.active}>
-            <img src={photo}/>
+            <img src={photo}
+                 alt={""}
+            />
             <div className={style.link}>
                 <NavLink to={"/dialogs/" + props.id} className={navData => navData.isActive ? style.active : ''}>
                     {props.name}

@@ -33,6 +33,7 @@ const ProfileInfo = (props) => {
                 <img
                     src="https://pix10.agoda.net/hotelImages/301716/-1/fe9724d8fb4da3dd4590353bd771a276.jpg?ca=9&ce=1&s=1024x768"
                     className={style.contentImg}
+                    alt={""}
                 />
 
             </div>
@@ -41,6 +42,7 @@ const ProfileInfo = (props) => {
                     <img
                         src={props.photos.large}
                         className={style.profileImg}
+                        alt={""}
                     />
                     <div>
                         {props.fullName}

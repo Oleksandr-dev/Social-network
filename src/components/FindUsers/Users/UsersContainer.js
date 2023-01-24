@@ -1,32 +1,21 @@
 import {connect} from "react-redux";
 import Users from "./Users";
 import {
-    follow,
-    setCurrentPage,
-    setTotalUsersCount,
-    setUsers,
-    setUsersShowMore,
-    unfollow,
-    toggleIsFetching
+    getUsersThunk,
+    navigationThunk,
+    showMoreThunk,
+    unfollowThunk,
+    followThunk,
 } from "../../redux/findUsersReducer";
 import React from "react";
 import User from "./User/User";
 import styles from "./Users.module.css";
-import {API} from "../../DAL/api";
 
 
 class UsersAPIContainer extends React.Component {
 
     componentDidMount() {
-        if (this.props.users.length === 0) {
-            this.props.toggleIsFetching(true)
-            API.users.getUsers(this.props.currentPage, this.props.pageSize).then(responce => {
-                    this.props.setUsers(responce.items)
-                    this.props.setTotalUsersCount(responce.totalCount)
-                    this.props.toggleIsFetching(false)
-                }
-            )
-        }
+        this.props.getUsersThunk(this.props.currentPage, this.props.pageSize)
     }
 
     usersElements = () => {
@@ -35,8 +24,9 @@ class UsersAPIContainer extends React.Component {
                 <User
                     key={u.id}
                     userInfo={u}
-                    followUser={this.props.follow}
-                    unfollowUser={this.props.unfollow}
+                    followingInProgress={this.props.followingInProgress}
+                    unfollowThunk={this.props.unfollowThunk}
+                    followThunk={this.props.followThunk}
                 />)
             )
         )
@@ -44,13 +34,7 @@ class UsersAPIContainer extends React.Component {
 
     onPageChanged = (currentNumber) => {
         if (currentNumber >= 1 && currentNumber <= Math.ceil(this.props.totalUsersCount / this.props.pageSize)) {
-            this.props.toggleIsFetching(true)
-            this.props.setCurrentPage(currentNumber)
-            API.users.getUsers(currentNumber, this.props.pageSize).then(responce => {
-                    this.props.setUsers(responce.items)
-                    this.props.toggleIsFetching(false)
-                }
-            )
+            this.props.navigationThunk(currentNumber, this.props.pageSize)
         }
     }
 
@@ -162,14 +146,7 @@ class UsersAPIContainer extends React.Component {
 
     onShowMore = () => {
         if (this.props.currentPage < Math.ceil(this.props.totalUsersCount / this.props.pageSize)) {
-            this.props.toggleIsFetching(true)
-            this.props.setCurrentPage(this.props.currentPage + 1)
-            API.users.getUsers(this.props.currentPage + 1, this.props.pageSize).then(responce => {
-                    this.props.setUsersShowMore(responce.items)
-                    this.props.toggleIsFetching(false)
-                }
-            )
-
+            this.props.showMoreThunk(this.props.currentPage, this.props.pageSize)
         }
     }
 
@@ -193,6 +170,7 @@ const mapStateToProps = (state) => {
         totalUsersCount: state.findUsersPage.totalUsersCount,
         pageSize: state.findUsersPage.pageSize,
         isFetching: state.findUsersPage.isFetching,
+        followingInProgress: state.findUsersPage.followingInProgress,
     }
 }
 
@@ -224,13 +202,11 @@ const mapStateToProps = (state) => {
 }*/
 
 const UsersContainer = connect(mapStateToProps, {
-    follow,
-    unfollow,
-    setUsers,
-    setUsersShowMore,
-    setTotalUsersCount,
-    setCurrentPage,
-    toggleIsFetching,
+    getUsersThunk,
+    navigationThunk,
+    showMoreThunk,
+    unfollowThunk,
+    followThunk
 })(UsersAPIContainer)
 
 export default UsersContainer

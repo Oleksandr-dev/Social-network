@@ -1,3 +1,5 @@
+import {API} from "../DAL/api";
+
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
@@ -5,6 +7,7 @@ const SET_USERS_SHOW_MORE = 'SET_USERS_SHOW_MORE'
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
+const TOGGLE_FOLLOWING_IN_PROGRESS = 'TOGGLE_FOLLOWING_IN_PROGRESS'
 
 
 let initialState = {
@@ -50,6 +53,7 @@ let initialState = {
     totalUsersCount: 22478,
     pageSize: 5,
     isFetching: false,
+    followingInProgress:[],
 }
 
 const findUsersReducer = (state = initialState, action) => {
@@ -104,6 +108,11 @@ const findUsersReducer = (state = initialState, action) => {
             return {...state, currentPage: action.currentPage}
         case TOGGLE_IS_FETCHING:
             return {...state, isFetching: action.isFetching}
+        case TOGGLE_FOLLOWING_IN_PROGRESS:
+            return {...state, followingInProgress: action.isFetchingFollow
+                    ? [...state.followingInProgress, action.id]
+                    : state.followingInProgress.filter(id => id!==action.id)
+            }
         default:
             return state
     }
@@ -118,3 +127,64 @@ export const setUsersShowMore = (users) => ({type: SET_USERS_SHOW_MORE, users,})
 export const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount,})
 export const setCurrentPage = (newCurrentPage) => ({type: SET_CURRENT_PAGE, currentPage: newCurrentPage,})
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching,})
+export const followIsFetching = (isFetchingFollow, id) => ({type: TOGGLE_FOLLOWING_IN_PROGRESS, isFetchingFollow, id})
+
+export const getUsersThunk = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(toggleIsFetching(true))
+        API.users.getUsers(currentPage, pageSize).then(responce => {
+                dispatch(setUsers(responce.items))
+                dispatch(setTotalUsersCount(responce.totalCount))
+                dispatch(toggleIsFetching(false))
+            }
+        )
+    }
+}
+export const navigationThunk = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(toggleIsFetching(true))
+        dispatch(setCurrentPage(currentPage))
+        API.users.getUsers(currentPage, pageSize).then(responce => {
+                dispatch(setUsers(responce.items))
+                dispatch(toggleIsFetching(false))
+            }
+        )
+    }
+}
+export const showMoreThunk = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(toggleIsFetching(true))
+        dispatch(setCurrentPage(currentPage + 1))
+        API.users.getUsers(currentPage + 1, pageSize).then(responce => {
+                dispatch(setUsersShowMore(responce.items))
+                dispatch(toggleIsFetching(false))
+            }
+        )
+    }
+}
+export const unfollowThunk = (id) => {
+    return (dispatch) => {
+        dispatch(followIsFetching(true, id))
+        API.users.unfollowUser(id).then(responce => {
+            if (responce.data.resultCode === 0) {
+                    dispatch(unfollow(id))
+                }
+                dispatch(followIsFetching(false, id))
+            }
+        )
+    }
+}
+export const followThunk = (id) => {
+    return (dispatch) => {
+        dispatch(followIsFetching(true, id))
+        API.users.followUser(id).then(responce => {
+                if (responce.data.resultCode === 0) {
+                    dispatch(follow(id))
+                }
+                dispatch(followIsFetching(false, id))
+
+            }
+        )
+    }
+}
+
