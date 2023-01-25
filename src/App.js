@@ -1,27 +1,28 @@
 import './App.css';
-import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
-import Dialogs from "./components/Dialogs/Dialogs";
 import {Route, Routes} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import FindUsers from "./components/FindUsers/FindUsers";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import NavbarContainer from "./components/Navbar/NavbarContainer";
+import LoginContainer from "./components/Login/LoginContainer";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 const App = () => {
     /*console.log("app")*/
     return (
         <div className="App-wrapper">
             <HeaderContainer />
-            <Navbar/>
+            <NavbarContainer/>
             <div className="App-wrapper-content">
                 <Routes>
-                    <Route path="/:userId" element={
+                    <Route path="/profile/:userId" element={
                         <Profile />}
                     />
                     <Route path="/dialogs/*" element={
-                        <Dialogs />}
+                        <DialogsContainer />}
                     />
                     <Route path="/find_users/*" element={
                         <FindUsers />}
@@ -34,6 +35,9 @@ const App = () => {
                     />
                     <Route path="/settings/*" element={
                         <Settings/>}
+                    />
+                    <Route path="/login/*" element={
+                        <LoginContainer/>}
                     />
                 </Routes>
             </div>

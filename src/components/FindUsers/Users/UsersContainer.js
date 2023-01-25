@@ -6,7 +6,7 @@ import {
     showMoreThunk,
     unfollowThunk,
     followThunk,
-} from "../../redux/findUsersReducer";
+} from "../../../redux/findUsersReducer";
 import React from "react";
 import User from "./User/User";
 import styles from "./Users.module.css";

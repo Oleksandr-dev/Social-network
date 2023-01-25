@@ -1,3 +1,6 @@
+import {API} from "../DAL/api";
+import {setTotalUsersCount, setUsers, toggleIsFetching} from "./findUsersReducer";
+
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 const SET_PROFILE = 'SET_PROFILE'
@@ -54,3 +57,13 @@ export default profileReducer
 export const addPostActionCreator = () => ({type: ADD_POST})
 export const updateNewPostTextActionCreator = (newText) => ({type: UPDATE_NEW_POST_TEXT, newText,})
 export const setProfile = (profile) => ({type: SET_PROFILE, profile})
+
+
+export const getProfileInfoThunk = (userId) => {
+    return (dispatch) => {
+        API.profile.getProfileInfo(userId).then(responce => {
+                dispatch(setProfile(responce))
+            }
+        )
+    }
+}

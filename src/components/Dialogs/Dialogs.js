@@ -1,13 +1,16 @@
 import style from "./Dialogs.module.css"
-import ContactsContainer from "./Contacts/ContactsContainer";
-import MessagesContainer from "./Messages/MessagesContainer";
+import Messages from "./Messages/Messages";
+import Contacts from "./Contacts/Contacts";
 
 const Dialogs = (props) => {
-
     return (
         <div className={style.dialogs}>
-            <ContactsContainer />
-            <MessagesContainer />
+            <Contacts dialogsElements={props.dialogsElements}/>
+            <Messages messageData={props.messageData}
+                      newMessageText={props.newMessageText}
+                      sendMessage={props.sendMessage}
+                      updateNewMessage={props.updateNewMessage}
+            />
         </div>
     )
 }

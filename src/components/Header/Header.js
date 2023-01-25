@@ -13,7 +13,10 @@ const Header = (props) => {
             </div>
             <div>
                 {props.auth.isAuth ? <div className={styles.emailOrLogin}>{props.auth.email}</div>
-                    : <NavLink to={'/'}>login</NavLink> }
+                    : <NavLink to={'/login'}>login</NavLink> }
+            </div>
+            <div>
+                <NavLink to={'/login'}>login</NavLink>
             </div>
         </header>
     );

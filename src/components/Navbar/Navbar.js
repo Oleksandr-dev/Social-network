@@ -7,7 +7,7 @@ const Navbar = () => {
         <div className={styles.navbar}>
             <div className={styles.menu}>
                 <div className={`${styles.item}`}>
-                    <NavLink to='/' className={navData=>navData.isActive ? styles.activeLink : ""}>
+                    <NavLink to='/profile/27521' className={navData=>navData.isActive ? styles.activeLink : ""}>
                         Profile
                     </NavLink>
                 </div>

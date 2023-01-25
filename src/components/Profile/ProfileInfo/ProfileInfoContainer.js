@@ -1,25 +1,18 @@
 import React from "react";
 import ProfileInfo from "./ProfileInfo";
 import {connect} from "react-redux";
-import {setProfile} from "../../redux/profileReducer";
+import {getProfileInfoThunk} from "../../../redux/profileReducer";
 import Preloader from "../../common/Preloader";
-import {
-    useLocation,
-    useNavigate,
-    useParams,
-} from "react-router-dom";
-import {API} from "../../DAL/api";
+import withRouter from "../../../HOC/withRouter";
+import {withAuthRedirect} from "../../../HOC/withAuthRedirect";
 
 
 // eslint-disable-next-line no-undef
 class ProfileInfoAPIContainer extends React.Component {
 
     componentDidMount() {
-        let userId = this.props.router.params.userId ? this.props.router.params.userId : 2
-        API.profile.getProfileInfo(userId).then(responce => {
-                this.props.setProfile(responce)
-            }
-        )
+        let userId = this.props.router.params.userId ? this.props.router.params.userId : 27521
+        this.props.getProfileInfoThunk(userId)
     }
 
     render() {
@@ -36,26 +29,12 @@ const mapStateToProps = (state) => {
     }
 }
 
-function withRouter(Component) {
-    function ComponentWithRouterProp(props) {
-        let location = useLocation();
-        let navigate = useNavigate();
-        let params = useParams();
-        return (
-            <Component
-                {...props}
-                router={{location, navigate, params}}
-            />
-        );
-    }
+let AuthRedirectComponent = withAuthRedirect(ProfileInfoAPIContainer)
 
-    return ComponentWithRouterProp;
-}
-
-let withURLProfileContainer = withRouter(ProfileInfoAPIContainer)
+let withURLProfileContainer = withRouter(AuthRedirectComponent)
 
 const ProfileInfoContainer = connect(mapStateToProps, {
-    setProfile,
+    getProfileInfoThunk,
 })(withURLProfileContainer)
 
 export default ProfileInfoContainer;
