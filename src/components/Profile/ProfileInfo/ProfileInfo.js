@@ -1,16 +1,16 @@
 import style from "./ProfileInfo.module.css"
+import ProfileStatus from "./ProfileStatus/ProfileStatus";
 
 const ProfileInfo = (props) => {
 
-    let contacts = [
-        'Contacts:'
-    ]
+    let contacts = []
+    let id = 0
     for (let key in props.contacts) {
         contacts.push(
-            <div>
+            <div key={id++}>
                 {key} :
                 {
-                    props.contacts[key] ? <a href={props.contacts[key]}> {props.contacts[key]} </a> :
+                    props.contacts[key] ? <a href={props.contacts[key]} > {props.contacts[key]} </a> :
                         <span>{ ' - ' }</span>
                 }
             </div>
@@ -35,20 +35,24 @@ const ProfileInfo = (props) => {
                     className={style.contentImg}
                     alt={""}
                 />
-
             </div>
             <div className={style.contentDescription}>
                 <div>
+                    <div>
+                        {props.fullName}
+                    </div>
                     <img
                         src={props.photos.large}
                         className={style.profileImg}
                         alt={""}
                     />
-                    <div>
-                        {props.fullName}
-                    </div><br />
+                    <ProfileStatus status={"Hello world"}/>
+                    <br />
                 </div>
                 <div className={style.contactsLink}>
+                    <div>
+                        Contacts :
+                    </div><br />
                     {contacts}
                 </div><br />
                 {findJob()}

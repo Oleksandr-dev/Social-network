@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "./Navbar";
 import {connect} from "react-redux";
+import {compose} from "redux";
 
 class NavbarClassContainer extends React.Component {
     render() {
@@ -13,6 +14,6 @@ const mapStateToProps = (state) => {
     }
 }
 
-const NavbarContainer = connect(mapStateToProps, {})(NavbarClassContainer)
-
-export default NavbarContainer;
+export default compose(
+    connect(mapStateToProps, {}),
+)(NavbarClassContainer)

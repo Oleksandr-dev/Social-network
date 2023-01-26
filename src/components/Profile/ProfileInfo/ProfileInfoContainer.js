@@ -5,6 +5,7 @@ import {getProfileInfoThunk} from "../../../redux/profileReducer";
 import Preloader from "../../common/Preloader";
 import withRouter from "../../../HOC/withRouter";
 import {withAuthRedirect} from "../../../HOC/withAuthRedirect";
+import {compose} from "redux";
 
 
 // eslint-disable-next-line no-undef
@@ -29,12 +30,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-let AuthRedirectComponent = withAuthRedirect(ProfileInfoAPIContainer)
-
-let withURLProfileContainer = withRouter(AuthRedirectComponent)
-
-const ProfileInfoContainer = connect(mapStateToProps, {
-    getProfileInfoThunk,
-})(withURLProfileContainer)
-
-export default ProfileInfoContainer;
+export default compose(
+    connect(mapStateToProps, {getProfileInfoThunk,}),
+    withRouter,
+    withAuthRedirect,
+)(ProfileInfoAPIContainer)

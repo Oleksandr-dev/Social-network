@@ -10,6 +10,7 @@ import {
 import React from "react";
 import User from "./User/User";
 import styles from "./Users.module.css";
+import {compose} from "redux";
 
 
 class UsersAPIContainer extends React.Component {
@@ -174,40 +175,15 @@ const mapStateToProps = (state) => {
     }
 }
 
-/*const mapDispatchToProps = (dispatch) => {
-    return {
-        followUser: (id) => {
-            dispatch(followAC(id))
-        },
-        unfollowUser: (id) => {
-            dispatch(unfollowAC(id))
-        },
-        setUsers: (users) => {
-            dispatch(setUsersAC(users))
-        },
-        setUsersShowMore: (users) => {
-            dispatch(setUsersShowMoreAC(users))
-        },
-        setTotalUsersCount: (totalUsersCount) => {
-            dispatch(setTotalUsersCountAC(totalUsersCount))
-        },
-        setCurrentPage: (newCurrentPage) => {
-            dispatch(setCurrentPageAC(newCurrentPage))
-        },
-        toggleIsFetching: (isFetching) => {
-            dispatch(toggleIsFetchingAC(isFetching))
-        },
-
-    }
-}*/
-
-const UsersContainer = connect(mapStateToProps, {
+const mapDispatchToProps = {
     getUsersThunk,
     navigationThunk,
     showMoreThunk,
     unfollowThunk,
-    followThunk
-})(UsersAPIContainer)
+    followThunk,
 
-export default UsersContainer
+}
 
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+)(UsersAPIContainer)

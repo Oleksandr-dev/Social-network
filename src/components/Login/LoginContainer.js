@@ -4,18 +4,9 @@ import {connect} from "react-redux";
 import {withAuthReverseRedirect} from "../../HOC/withAuthReverseRedirect";
 import withRouter from "../../HOC/withRouter";
 import {getProfileInfoThunk} from "../../redux/profileReducer";
+import {compose} from "redux";
 
 
-/*const LoginFirstContainer = (props) => {
-
-
-    const navigate = useNavigate();
-    if(props.isAuth){
-        navigate(-1)
-    }
-    return <Login/>
-
-}*/
 /*class LoginAPIContainer extends React.Component {
 
     componentDidMount() {
@@ -27,13 +18,13 @@ import {getProfileInfoThunk} from "../../redux/profileReducer";
     }
 }*/
 
-const AuthReverseRedirectComponent = withAuthReverseRedirect(Login)
-const WithURLDataContainer = withRouter(AuthReverseRedirectComponent)
-
 const mapStateToProps = (state) => {
     return {
     }
 }
 
-const LoginContainer = connect(mapStateToProps, {getProfileInfoThunk})(WithURLDataContainer)
-export default LoginContainer
+export default compose(
+    connect(mapStateToProps, {getProfileInfoThunk}),
+    withRouter,
+    withAuthReverseRedirect,
+)(Login)

@@ -3,11 +3,12 @@ import {NavLink} from "react-router-dom";
 import Friends from "./Friends/Friends";
 
 const Navbar = () => {
+    const myId=27521
     return (
         <div className={styles.navbar}>
             <div className={styles.menu}>
                 <div className={`${styles.item}`}>
-                    <NavLink to='/profile/27521' className={navData=>navData.isActive ? styles.activeLink : ""}>
+                    <NavLink to={`/profile/${myId}`} className={navData=>navData.isActive ? styles.activeLink : ""}>
                         Profile
                     </NavLink>
                 </div>
