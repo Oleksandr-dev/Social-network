@@ -26,8 +26,15 @@ export const API = {
         },
     },
     profile:{
-        getProfileInfo : (userId) => {
+        getProfileInfo: (userId) => {
             return instanceAPI.get(`profile/${userId}`).then(responce => responce.data)
+        },
+        getProfileStatus: (userId) => {
+            return instanceAPI.get(`profile/status/${userId}`).then(response => response.data)
+            //response = string
+        },
+        putProfileStatus: (status) => {
+            return instanceAPI.put(`profile/status`, {status: status})
         }
     },
 }

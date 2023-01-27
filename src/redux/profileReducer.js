@@ -3,6 +3,7 @@ import {API} from "../DAL/api";
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 const SET_PROFILE = 'SET_PROFILE'
+const SET_STATUS = 'SET_STATUS'
 
 let initialState = {
     postData: [
@@ -11,6 +12,7 @@ let initialState = {
     ],
     newPostText: 'My new post',
     profile: null,
+    status: "Hi, I am status"
 }
 
 const profileReducer = (profilePage = initialState, action) => {
@@ -36,6 +38,12 @@ const profileReducer = (profilePage = initialState, action) => {
                 newPostText: action.newText,
             }
         }
+        case SET_STATUS: {
+            return {
+                ...profilePage,
+                status: action.status,
+            }
+        }
         case SET_PROFILE: {
             return {
                 ...profilePage,
@@ -56,6 +64,7 @@ export default profileReducer
 export const addPostActionCreator = () => ({type: ADD_POST})
 export const updateNewPostTextActionCreator = (newText) => ({type: UPDATE_NEW_POST_TEXT, newText,})
 export const setProfile = (profile) => ({type: SET_PROFILE, profile})
+export const setStatus = (status) => ({type: SET_STATUS, status})
 
 
 export const getProfileInfoThunk = (userId) => {
@@ -64,5 +73,30 @@ export const getProfileInfoThunk = (userId) => {
                 dispatch(setProfile(responce))
             }
         )
+    }
+}
+
+export const getProfileStatusThunk = (userId) => {
+    return (dispatch) => {
+        API.profile.getProfileStatus(userId).then(responce => {
+                console.log(`getStatus responce${responce}`)
+                console.log(responce)
+                dispatch(setStatus(responce))
+            }
+        )
+    }
+}
+export const updateProfileStatusThunk = (status) => {
+    return (dispatch) => {
+        API.profile.putProfileStatus(status).then(responce => {
+            console.log(responce)
+            console.log(status)
+            if (responce.data.resultCode === 0) {
+                dispatch(setStatus(status))
+                console.log("responce is ok")
+            } else {
+                alert(responce.message)
+            }
+        })
     }
 }

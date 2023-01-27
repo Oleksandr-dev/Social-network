@@ -1,6 +1,7 @@
 import style from "./ProfileInfo.module.css"
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
 
+
 const ProfileInfo = (props) => {
 
     let contacts = []
@@ -26,27 +27,24 @@ const ProfileInfo = (props) => {
         return null
     }
 
-
+    //debugger
     return (
         <div className={style.content}>
             <div>
-                <img
-                    src="https://pix10.agoda.net/hotelImages/301716/-1/fe9724d8fb4da3dd4590353bd771a276.jpg?ca=9&ce=1&s=1024x768"
-                    className={style.contentImg}
-                    alt={""}
-                />
+                <img src="https://pix10.agoda.net/hotelImages/301716/-1/fe9724d8fb4da3dd4590353bd771a276.jpg?ca=9&ce=1&s=1024x768"
+                     className={style.contentImg}
+                     alt={""}/>
             </div>
             <div className={style.contentDescription}>
                 <div>
                     <div>
                         {props.fullName}
                     </div>
-                    <img
-                        src={props.photos.large}
-                        className={style.profileImg}
-                        alt={""}
-                    />
-                    <ProfileStatus status={"Hello world"}/>
+                    <img src={props.photos.large}
+                         className={style.profileImg}
+                         alt={""}/>
+                    <ProfileStatus status={props.status}
+                                   updateProfileStatus={props.updateProfileStatus}/>
                     <br />
                 </div>
                 <div className={style.contactsLink}>
