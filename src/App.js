@@ -1,5 +1,4 @@
 import './App.css';
-import Profile from "./components/Profile/Profile";
 import {Route, Routes} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
@@ -9,6 +8,7 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import NavbarContainer from "./components/Navbar/NavbarContainer";
 import LoginContainer from "./components/Login/LoginContainer";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 const App = () => {
     /*console.log("app")*/
@@ -19,7 +19,7 @@ const App = () => {
             <div className="App-wrapper-content">
                 <Routes>
                     <Route path="/profile/:userId" element={
-                        <Profile />}
+                        <ProfileContainer />}
                     />
                     <Route path="/dialogs/*" element={
                         <DialogsContainer />}

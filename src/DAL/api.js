@@ -11,7 +11,13 @@ export const API = {
     auth:{
         getUser : () => {
             return instanceAPI.get(`auth/me`).then(responce => responce.data)
-        }
+        },
+        loginUser : (authData) => {
+            return instanceAPI.post(`auth/login`, {...authData}).then(responce => responce.data)
+        },
+        logoutUser : (authData) => {
+            return instanceAPI.delete(`auth/login`, ).then(responce => responce.data)
+        },
     },
     users:{
         getUsers : (currentPage, pageSize) => {

@@ -5,13 +5,15 @@ import MessageTextArea from "./MessageTextArea/MessageTextArea";
 import React from "react";
 
 const Messages = (props) => {
+    const onSubmit = (formData) => {
+        console.log(formData)
+        props.sendMessage(formData.messageBoxTextArea)
+    }
     return (
         <div className={style.messageArea}>
             <MessageHeader/>
             <MessageArea messageData={props.messageData}/>
-            <MessageTextArea newMessageText={props.newMessageText}
-                             sendMessage={props.sendMessage}
-                             updateNewMessage={props.updateNewMessage}/>
+            <MessageTextArea onSubmit={onSubmit}/>
         </div>
     )
 }

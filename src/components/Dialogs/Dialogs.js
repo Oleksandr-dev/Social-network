@@ -7,10 +7,7 @@ const Dialogs = (props) => {
         <div className={style.dialogs}>
             <Contacts dialogsElements={props.dialogsElements}/>
             <Messages messageData={props.messageData}
-                      newMessageText={props.newMessageText}
-                      sendMessage={props.sendMessage}
-                      updateNewMessage={props.updateNewMessage}
-            />
+                      sendMessage={props.sendMessage}/>
         </div>
     )
 }

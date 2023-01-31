@@ -1,15 +1,17 @@
 import React from "react";
-import ProfileInfo from "./ProfileInfo";
 import {connect} from "react-redux";
-import {getProfileInfoThunk, getProfileStatusThunk, updateProfileStatusThunk} from "../../../redux/profileReducer";
-import Preloader from "../../common/Preloader";
-import withRouter from "../../../HOC/withRouter";
-import {withAuthRedirect} from "../../../HOC/withAuthRedirect";
+import {
+    addPost,
+    getProfileInfoThunk,
+    getProfileStatusThunk,
+    updateProfileStatusThunk
+} from "../../redux/profileReducer";
+import withRouter from "../../HOC/withRouter";
+import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
+import Profile from "./Profile";
 
-
-// eslint-disable-next-line no-undef
-class ProfileInfoAPIContainer extends React.Component {
+class ProfileContainer extends React.Component {
     state = {
         userId: this.props.router.params.userId ? this.props.router.params.userId : 27521,
     }
@@ -24,14 +26,8 @@ class ProfileInfoAPIContainer extends React.Component {
             this.setState({userId: this.props.router.params.userId})
         }
     }*/
-
     render() {
-        if (this.props.profile == null) {
-            return <Preloader/>
-        }
-        return (<ProfileInfo {...this.props.profile}
-                             status={this.props.status}
-                             updateProfileStatus={this.props.updateProfileStatusThunk}/>);
+        return <Profile {...this.props}/>
     }
 }
 
@@ -39,6 +35,7 @@ const mapStateToProps = (state) => {
     return {
         profile: state.profilePage.profile,
         status: state.profilePage.status,
+        postElements: state.profilePage.postData,
     }
 }
 
@@ -47,7 +44,8 @@ export default compose(
         getProfileInfoThunk,
         getProfileStatusThunk,
         updateProfileStatusThunk,
+        addPost,
     }),
     withRouter,
     withAuthRedirect,
-)(ProfileInfoAPIContainer)
+)(ProfileContainer)

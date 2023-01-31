@@ -1,10 +1,11 @@
 //import React from "react";
 import Login from "./Login";
 import {connect} from "react-redux";
-import {withAuthReverseRedirect} from "../../HOC/withAuthReverseRedirect";
+//import {withAuthReverseRedirect} from "../../HOC/withAuthReverseRedirect";
 import withRouter from "../../HOC/withRouter";
 import {getProfileInfoThunk} from "../../redux/profileReducer";
 import {compose} from "redux";
+import {getProfile, logInProfileThunk} from "../../redux/authReducer";
 
 
 /*class LoginAPIContainer extends React.Component {
@@ -24,7 +25,7 @@ const mapStateToProps = (state) => {
 }
 
 export default compose(
-    connect(mapStateToProps, {getProfileInfoThunk}),
+    connect(mapStateToProps, {getProfileInfoThunk, logInProfileThunk, getProfile}),
     withRouter,
-    withAuthReverseRedirect,
+    //withAuthReverseRedirect,
 )(Login)
