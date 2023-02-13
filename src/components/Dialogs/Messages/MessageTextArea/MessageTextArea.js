@@ -1,8 +1,10 @@
 import style from "./MessageTextArea.module.css"
 import React from "react";
 import {Field, reduxForm} from "redux-form";
+import {Textarea} from "../../../utilits/InputValidateComponent";
+import {maxLengthCreator, required} from "../../../utilits/validators";
 
-
+let maxLength50 = maxLengthCreator(50)
 const MessageTextArea = (props) => {
 
     return (
@@ -10,8 +12,9 @@ const MessageTextArea = (props) => {
             <form onSubmit={props.handleSubmit}>
                 <div className={style.textArea}>
                 <Field name={"messageBoxTextArea"}
-                       component={"textarea"}
-                       className={style.area}
+                       component={Textarea}
+                       validate={[required, maxLength50]}
+                       //className={style.area}
                        placeholder={"Enter new message"}/>
                 <button className={style.btnAdd}>Send message</button>
                 </div>

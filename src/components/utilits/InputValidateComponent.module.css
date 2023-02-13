@@ -1,0 +1,31 @@
+.txt{
+
+}
+.formControl{
+    grid-area: txt;
+    display: grid;
+}
+.formControlInput{
+}
+
+textarea,input{outline: none;
+    border: none;
+}
+.formControl.error textarea,
+.formControl.error input{
+    border: solid red 2px;
+    /*height: 100%;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;*/
+}
+.formControlInput.error input{
+    border: solid red 2px;
+    /*height: 100%;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;*/
+}
+.spanError{
+    color:red;
+}

@@ -2,6 +2,8 @@ import style from "./MyPosts.module.css"
 import Post from "./Post/Post";
 import React from "react";
 import {Field, reduxForm} from "redux-form";
+import {maxLengthCreator, required} from "../../utilits/validators";
+import {Textarea} from "../../utilits/InputValidateComponent";
 
 
 const MyPosts = (props) => {
@@ -24,14 +26,17 @@ const MyPosts = (props) => {
         </div>
     );
 }
-
+let maxLength10 = maxLengthCreator(10)
 const MyPostForm = (props) =>{
+
     return (
         <form onSubmit={props.handleSubmit}>
             <div className={style.textPost}>
                 <Field name={"addPostFormTextArea"}
-                       component={"textarea"}
-                       className={style.txt}
+                       //component={"textarea"}
+                       component={Textarea}
+                       //className={style.txt}
+                       validate={[required,maxLength10]}
                        placeholder={"Enter post"}/>
                 <button className={style.btnAdd}>Add post</button>
             </div>

@@ -10,6 +10,7 @@
 
     /*grid-template-rows: 1fr 1fr;*/
     grid-template-columns: 9fr 1fr;
+    margin: 10px;
 }
 
 .btnAdd{
@@ -22,4 +23,8 @@
 
 .txt{
     grid-area: txt;
+}
+
+.errorField{
+    border: red 2px;
 }
