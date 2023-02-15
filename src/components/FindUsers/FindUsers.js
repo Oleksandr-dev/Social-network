@@ -3,7 +3,7 @@ import UsersContainer from "./Users/UsersContainer";
 
 
 const FindUsers = () =>{
-    /*console.log("find users")*/
+    console.log("find users")
     return (
         <div>
             <FindUsersHeader />
